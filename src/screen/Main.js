@@ -16,13 +16,30 @@ import { addTodo } from '../redux/reducer/todoSlice';
 const Main = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState('');
+  const [badTask, setBadTask] = useState(false);
   const todos = useSelector(state => state.todos);
 
+  const validation = () => {
+    let isValid = true;
+
+    if (task === '') {
+      setBadTask(true);
+      isValid = false;
+    } else {
+      setBadTask(false);
+    }
+    if (!isValid) return;
+
+    dispatch(addTodo(task));
+    setTask('');
+  };
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={{ fontSize: 26, fontWeight: '900', color: '#151515ff' }}>Your To Do</Text>
+          <Text style={{ fontSize: 26, fontWeight: '900', color: '#151515ff' }}>
+            Your To Do
+          </Text>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             <TextInput
               placeholder={'Add New Task'}
@@ -37,10 +54,7 @@ const Main = () => {
                 paddingHorizontal: 5,
                 paddingTop: 10,
               }}
-              onPress={() => {
-                dispatch(addTodo(task));
-                setTask('')
-              }}
+              onPress={validation}
             >
               <Image
                 source={require('../assests/more.png')}
@@ -49,9 +63,14 @@ const Main = () => {
             </TouchableOpacity>
           </View>
           <View>
+            {badTask && (
+              <Text style={{ color: 'red', fontSize: 12 }}>
+                Please Enter Your Task!!
+              </Text>
+            )}
             <TodoList />
           </View>
-          <View style={{ marginTop: 15, gap: 5, paddingRight: 60 }}>
+          <View style={{ marginTop: 10, gap: 5, paddingRight: 60 }}>
             <Text
               style={{
                 fontStyle: 'italic',
