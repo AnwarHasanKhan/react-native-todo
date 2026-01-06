@@ -58,7 +58,7 @@ const Main = () => {
             >
               <Image
                 source={require('../assests/more.png')}
-                style={{ height: 30, width: 30 }}
+                style={{ height: 30, width: 30, tintColor:'#ffffffff',backgroundColor:'#000000ff' }}
               />
             </TouchableOpacity>
           </View>
@@ -102,6 +102,7 @@ export default Main;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    marginTop:50,
     padding: 20,
     justifyContent: 'center',
   },

@@ -11,6 +11,9 @@ const App = () => {
     <Provider store={store}>
       <Main />
     </Provider>
+    // <QueryClientProvider client={queryClient}>
+    // <Example />
+    // </QueryClientProvider>
   );
 };
 
